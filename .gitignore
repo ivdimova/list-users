@@ -1,0 +1,12 @@
+DS_Store
+.env
+.history
+*.csv
+*.log
+*.sql*
+
+.phpunit.result.cache
+/vendor
+composer.lock
+package-lock.json
+/node_modules
