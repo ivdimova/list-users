@@ -14,5 +14,24 @@
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "render": "file:./render.php"
+  "attributes": {
+    "backgroundColor": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "idChecked": {
+      "type": "boolean"
+    },
+    "nameChecked": {
+      "type": "boolean"
+    },
+    "emailChecked": {
+      "type": "boolean"
+    }
+  }
 }

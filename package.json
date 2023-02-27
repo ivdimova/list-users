@@ -1,7 +1,7 @@
 {
 	"name": "list-users",
 	"version": "0.1.0",
-	"description": "Display List of Users",
+	"description": "Gets list of users data from external API.",
 	"author": "Ivelina Dimova",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",

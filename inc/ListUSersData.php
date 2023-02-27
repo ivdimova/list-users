@@ -21,7 +21,7 @@ class ListUsersData
 
     public function __construct()
     {
-        $this->apiUrl = 'https://miusage.com/v1/';
+        $this->apiUrl = '';
     }
 
     /**

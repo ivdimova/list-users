@@ -59,11 +59,9 @@ class ListUsersAdmin
 			$page_slug
 		);
 
-		register_setting( $option_group, 'az_taxonomy', 'sanitize_text_field' );
-
 		add_settings_field(
 			'api-users-refresh',
-			esc_html__( 'Click to Refresh: ', 'users' ),
+			esc_html__( 'Click to Refresh: ', 'list-users' ),
 			[$this, 'api_users_field'],
 			$page_slug,
 			'api_users_settings_section'
@@ -94,13 +92,13 @@ class ListUsersAdmin
 		?>
 		<div class="wrap">
 			<div id="icon-edit" class="icon32 icon32-base-template"><br></div>
-			<h1><?php echo esc_html( get_admin_page_title( 'apiusers-admin' ) ); ?></h1>
+			<h1><?php echo esc_html( get_admin_page_title( 'list-users-admin' ) ); ?></h1>
 			<table id="users-table">
         <tbody>
             <tr>
-                <th><?php echo esc_html__('Name', 'users'); ?></th>
-                <th><?php echo esc_html__('ID', 'users'); ?></th>
-                <th><?php echo esc_html__('Email', 'users'); ?></th>
+                <th><?php echo esc_html__('Name', 'list-users'); ?></th>
+                <th><?php echo esc_html__('ID', 'list-users'); ?></th>
+                <th><?php echo esc_html__('Email', 'list-users'); ?></th>
             </tr>
             <?php
             foreach ($users_data as $user) { 
@@ -111,16 +109,16 @@ class ListUsersAdmin
                 ?>
                  <tr>
                     <td>
-                        <span data-user_id="<?php echo esc_attr($userId); ?>">
-                        <?php echo esc_html($userName); ?> <?php echo esc_html($userLast); ?></span>
+                        <span data-user_id="<?php echo esc_attr( $userId ); ?>">
+                        <?php echo esc_html( $userName ); ?> <?php echo esc_html( $userLast ); ?></span>
                     </td>
                     <td>
-                        <span data-user_id="<?php echo esc_attr($userId); ?>">
-                        <?php echo esc_html($userId); ?></span>
+                        <span data-user_id="<?php echo esc_attr( $userId ); ?>">
+                        <?php echo esc_html( $userId ); ?></span>
                     </td>
                     <td>
-                        <span data-user_id="<?php echo esc_attr($userId); ?>">
-                        <?php echo esc_html($userUsername); ?></span>
+                        <span data-user_id="<?php echo esc_attr( $userId ); ?>">
+                        <?php echo esc_html( $userUsername ); ?></span>
                     </td>
                 </tr>
             <?php }
@@ -133,14 +131,13 @@ class ListUsersAdmin
 			
 			if (
 				isset($_POST['_wpnonce'])
-				//check_admin_referer('refresh_button')
 			) {
 				$this->refresh_users();
 			}
 				wp_nonce_field('refresh_button'); 
 				settings_fields( 'apiusers_settings' );
 				do_settings_sections( 'apiusers_admin' );
-				submit_button( esc_html__( 'Refresh users ', 'users' ));
+				submit_button( esc_html__( 'Refresh users ', 'list-users' ));
 				
 				?>
 	
@@ -150,13 +147,13 @@ class ListUsersAdmin
 	}
 
 	/**
-	 * Settings display for API Users plugin.
+	 * Settings display for List Users plugin.
 	 *
 	 * @return void.
 	 */
 	public function refresh_users() : void {
 		
-		if (! isset($_POST['api-users-refresh'])) {
+		if ( ! isset($_POST['api-users-refresh'] ) ) {
            return;
         }
 
@@ -164,7 +161,7 @@ class ListUsersAdmin
 			$users = new Data\ListUsersData();
 			$users->updateUsers();
 			
-			echo '<h2>' . esc_html__( 'Users Updated', 'users' ) . '</h2>';
+			echo '<h2>' . esc_html__( 'Users Updated', 'list-users' ) . '</h2>';
 		}
 	}
 }

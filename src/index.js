@@ -1,5 +1,5 @@
 /**
- * Registers a new block provided a unique name and an object defining its behavior.
+ * Registers a new block to show the list of users.
  *
  */
 import { registerBlockType } from '@wordpress/blocks';
