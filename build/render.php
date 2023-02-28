@@ -24,9 +24,12 @@ function list_users_render_callback( $block_attributes, $content ) {
 	ob_start();?>
 		<div class="wp-block-ivdimova-list-users" style="background:<?php echo esc_attr( $backgroundColor ); ?>; color: <?php echo esc_attr( $color ); ?>">
 		<?php if ( ! $is_block_editor ) : ?>
-			<h2><?php echo esc_html( $block_attributes['title'] ); ?></h2>
+			<h2 id="users-title"><?php echo esc_html( $block_attributes['title'] ); ?></h2>
 		<?php endif; ?>
 			<?php $users_display->userDetails( $idChecked, $nameChecked, $emailChecked );?>
 		</div>
+		<script>
+			window.listUsers = <?php echo wp_json_encode( $block_attributes ); ?>;
+		</script>
 	<?php return (string) ob_get_clean();
 }

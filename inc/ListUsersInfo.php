@@ -20,7 +20,7 @@ class ListUsersInfo
     public function setup(): void
     {
 
-        add_action('wp_enqueue_scripts', [$this, 'ajaxUsersScript']);
+		add_action('wp_enqueue_scripts', [$this, 'ajaxUsersScript']);
         add_action('wp_ajax_api_user_details', [$this, 'usersInfo']);
         add_action('wp_ajax_nopriv_api_user_details', [$this, 'usersInfo']);
     }
@@ -59,7 +59,7 @@ class ListUsersInfo
 		data-nonce="<?php echo esc_attr( wp_create_nonce( 'api_user_details' ) ); ?>"
 		>
         <tbody>
-            <th>
+            <tr>
 				<?php if ( $idChecked !== true ) {  ?>
 					<th><?php echo esc_html__('User ID', 'list-users'); ?></th>
 				<?php } ?>
@@ -69,7 +69,7 @@ class ListUsersInfo
 				<?php if ( $emailChecked !== true ) { ?>
 					<th><?php echo esc_html__('Email', 'users'); ?></th>
 				<?php } ?>  
-            </th>
+            </tr>
 			<?php foreach ($usersData as $user) {
 				
 				$userName = isset($user['fname']) ? $user['fname'] : '';
@@ -98,9 +98,6 @@ class ListUsersInfo
         } 
 		?>
             </tbody>
-			<button id="users-udpate" type='submit'>
-				<?php esc_html_e( 'Update results', 'list-users' ); ?>
-			</button>
         </table>
 	<?php
     }
@@ -116,17 +113,18 @@ class ListUsersInfo
         wp_register_script(
             'api-users-script',
             plugins_url('js/custom.js', __FILE__),
-            [ 'jquery' ],
-            '0.0.1',
+            [],
+            '0.0.2',
             true
         );
 
         $scriptDataArray = [
-        'url' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('api_user_details'),
+			'url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('api_user_details'),
         ];
         wp_localize_script('api-users-script', 'ajax_object', $scriptDataArray);
 
         wp_enqueue_script('api-users-script');
     }
+
 }
