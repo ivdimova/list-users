@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-namespace ListUsers\Data;
+namespace ListUsers;
 
 use WP_Error;
 
@@ -19,13 +19,13 @@ class ListUsersData {
 	 *
 	 * @var string
 	 */
-	private $apiUrl;
+	protected $apiUrl;
 
 	/**
 	 * Construct.
 	 */
 	public function __construct() {
-		$this->apiUrl = '';
+		$this->apiUrl = 'https://miusage.com/v1/';
 	}
 
 	/**

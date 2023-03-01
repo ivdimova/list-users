@@ -6,11 +6,17 @@
 
 declare(strict_types=1);
 
-namespace ListUsers\Info;
-
-use ListUsers\Data;
+namespace ListUsers;
 
 class ListUsersInfo {
+
+	protected $data;
+
+	public function __construct(Data\ListUsersData $data)
+    {
+		$this->data = $data;
+    }
+
 
 	/**
 	 * Setup.

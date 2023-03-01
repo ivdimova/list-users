@@ -6,12 +6,14 @@
 
  declare(strict_types=1);
 
-namespace ListUsers\Admin;
-
-use ListUsers\Data;
+namespace ListUsers;
 
 class ListUsersAdmin {
-	public function __construct() {
+
+	protected $data;
+
+	public function __construct($data) {
+		$this->data = $data;
 	}
 	/**
 	 * Start the admin settings.
@@ -84,8 +86,7 @@ class ListUsersAdmin {
 	 * @return void.
 	 */
 	public function api_users_settings() : void {
-		$users = new Data\ListUsersData();
-		$users_data = $users->allUsers();
+		$users_data = $this->data->allUsers();
 		?>
 		<div class="wrap">
 			<div id="icon-edit" class="icon32 icon32-base-template"><br></div>
@@ -144,8 +145,7 @@ class ListUsersAdmin {
 	public function refresh_users() : void {
 
 		if ( isset($_POST['api-users-refresh'] ) && 'true' === $_POST['api-users-refresh'] ) {
-			$users = new Data\ListUsersData();
-			$users->updateUsers();
+			$this->data->updateUsers();
 			echo '<h2>' . esc_html__( 'Users Updated', 'list-users' ) . '</h2>';
 		}
 	}

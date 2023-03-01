@@ -15,28 +15,20 @@ namespace ListUsers;
 
 use WP_CLI;
 
-require_once __DIR__ . '/inc/namespace.php';
-require_once __DIR__ . '/build/render.php';
-
-register_activation_hook( __FILE__, __NAMESPACE__ . '\\api_users_integration_activate' );
-register_deactivation_hook( __FILE__, __NAMESPACE__ . '\\api_users_integration_deactivate' );
-
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	include_once __DIR__ . '/inc/ListUsersSync.php';
+	include_once('inc/WPCLISync.php');
 
-	\WP_CLI::add_command( 'users-api-sync', 'ListUsers\\Sync\\WP_CLI_Sync' );
+	\WP_CLI::add_command( 'users-api-sync', 'ListUsers\\WPCLISync' );
 }
 
-/**
- * Add the list users custom block.
- *
- * @return void.
- */
-function list_users_block_init() : void {
-	register_block_type( __DIR__ . '/build', [
-		'render_callback' => __NAMESPACE__ . '\\list_users_render_callback',
-		]
-	);
+if (!class_exists(ListUsers::class) && is_readable(__DIR__.'/vendor/autoload.php')) {
+    require_once __DIR__.'/vendor/autoload.php';
 }
-add_action( 'init', __NAMESPACE__ . '\\list_users_block_init' );
+
+$data = new ListUsersData();
+$plugin = new ListUsers(__FILE__, $data);
+$plugin->setup();
+
+$plugin_admin = new ListUsersAdmin($data);
+$plugin_admin->setup();
 

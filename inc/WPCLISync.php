@@ -5,23 +5,22 @@
 
 declare( strict_types=1 );
 
-namespace ListUsers\Sync;
+namespace ListUsers;
 
-use ListUsers\Data;
 use WP_CLI;
 use WP_CLI_Command;
 
 /**
  * Class containing commands to sync users from API.
  */
-class WP_CLI_Sync extends WP_CLI_Command {
+class WPCLISync extends WP_CLI_Command {
 	/**
 	 * Sync the users with WP CLI command.
 	 *
 	 * @return void.
 	 */
 	public function sync_users() : void {
-		$users = new Data\ListUsersData();
+		$users = new ListUsersData();
 		$data = $users->apiResponse( 'challenge/1/' );
 
 		if ( is_wp_error( $data ) ) {

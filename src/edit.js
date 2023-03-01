@@ -37,7 +37,7 @@ export default function Edit(props) {
 				/>
 				<CheckboxControl
 					label={ __( 'Hide User name', 'list-users' ) }
-					help={ __( 'Is the user name visible', 'list-users' ) }
+					help={ __( 'Is the user name visible?', 'list-users' ) }
 					checked={ nameChecked }
 					onChange={ nameChecked => setAttributes( { nameChecked } ) }
 				/>
