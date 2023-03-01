@@ -58,6 +58,8 @@ class ListUsersAdmin {
 			$page_slug
 		);
 
+		register_setting( $option_group, 'api_users_field', 'sanitize_text_field' ); 
+
 		add_settings_field(
 			'api-users-refresh',
 			esc_html__( 'Click to Refresh: ', 'list-users' ),
