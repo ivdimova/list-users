@@ -126,8 +126,9 @@ class ListUsersAdmin {
        </tbody>
     </table>
 
-	<form id="api-users-form" action="options.php?page=apiusers" method="POST"?>
-		<?php if ( isset($_POST['api-users-refresh'] ) )  {
+	<form id="api-users-form" action="<?php echo wp_nonce_url(get_admin_url() .'options.php?page=apiusers', 'update-users', 'refresh-users' ); ?>" method="POST" ?>
+		
+		<?php if ( isset($_POST['api-users-refresh'] ) && check_admin_referer('update-users','refresh-users') )  {
 				$this->refresh_users();
 			}
 				settings_fields( 'apiusers_settings' );
@@ -146,7 +147,7 @@ class ListUsersAdmin {
 	 */
 	public function refresh_users() : void {
 
-		if ( isset($_POST['api-users-refresh'] ) && 'true' === $_POST['api-users-refresh'] ) {
+		if ( isset($_POST['api-users-refresh'] ) && check_admin_referer('update-users','refresh-users') ) {
 			$this->data->updateUsers();
 			echo '<h2>' . esc_html__( 'Users Updated', 'list-users' ) . '</h2>';
 		}
