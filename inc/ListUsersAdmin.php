@@ -10,6 +10,9 @@ namespace ListUsers;
 
 class ListUsersAdmin {
 
+	/**
+	 * The API data.
+	 */
 	protected $data;
 
 	public function __construct($data) {

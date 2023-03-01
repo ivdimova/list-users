@@ -31,8 +31,14 @@ class ListUsers
      */
     private $rules;
 
+	/**
+	 * Users data.
+	 */
 	protected $data;
 
+	/**
+	 * Path to the plugin file.
+	 */
 	protected $path;
 
     public function __construct( $path, $data)

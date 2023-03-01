@@ -88,13 +88,13 @@ class ListUsersData {
 	/**
 	 * Update users data.
 	 *
-	 * @return void.
+	 * @return mixed.
 	 */
 	public function updateUsers(): void {
 
 		$data = $this->apiResponse( 'challenge/1/' );
 
-		if ( is_array( $data['data']['rows'] ) && ! empty( $data['data']['rows'] ) ) {
+		if ( ! empty( $data ) && is_array( $data ) ) {
 			$users = $data['data']['rows'];
 			set_transient( 'users_data', $users, HOUR_IN_SECONDS * 2 );
 		}
