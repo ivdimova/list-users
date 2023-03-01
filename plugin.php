@@ -15,14 +15,12 @@ namespace ListUsers;
 
 use WP_CLI;
 
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	include_once('inc/WPCLISync.php');
-
-	\WP_CLI::add_command( 'users-api-sync', 'ListUsers\\WPCLISync' );
-}
-
 if (!class_exists(ListUsers::class) && is_readable(__DIR__.'/vendor/autoload.php')) {
     require_once __DIR__.'/vendor/autoload.php';
+}
+
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	\WP_CLI::add_command( 'users-api-sync', 'ListUsers\\WPCLISync' );
 }
 
 $data = new ListUsersData();
