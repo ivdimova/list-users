@@ -9,12 +9,9 @@
 namespace ListUsers\Admin;
 
 use ListUsers\Data;
-use WP_Error;
 
-class ListUsersAdmin
-{
-	public function __construct()
-	{
+class ListUsersAdmin {
+	public function __construct() {
 	}
 	/**
 	 * Start the admin settings.
@@ -33,8 +30,8 @@ class ListUsersAdmin
 	 */
 	public function list_users_admin_page() : void {
 		add_menu_page(
-			esc_html__( 'List Users', 'users' ),
-			esc_html__( 'List Users', 'users' ),
+			esc_html__( 'List Users', 'list-users' ),
+			esc_html__( 'List Users', 'list-users' ),
 			'manage_options',
 			'apiusers',
 			[$this, 'api_users_settings'],
@@ -126,21 +123,14 @@ class ListUsersAdmin
        </tbody>
     </table>
 
-			<form id="api-users-form" action="options.php?page=apiusers" method="POST">
-			<?php 
-			
-			if (
-				isset($_POST['_wpnonce'])
-			) {
+	<form id="api-users-form" action="options.php?page=apiusers" method="POST"?>
+		<?php if ( isset($_POST['api-users-refresh'] ) )  {
 				$this->refresh_users();
 			}
-				wp_nonce_field('refresh_button'); 
 				settings_fields( 'apiusers_settings' );
 				do_settings_sections( 'apiusers_admin' );
 				submit_button( esc_html__( 'Refresh users ', 'list-users' ));
-				
 				?>
-	
 				</form>
 			</div>
 		<?php
@@ -152,15 +142,10 @@ class ListUsersAdmin
 	 * @return void.
 	 */
 	public function refresh_users() : void {
-		
-		if ( ! isset($_POST['api-users-refresh'] ) ) {
-           return;
-        }
 
-		if ( 'true' === $_POST['api-users-refresh'] ) {
+		if ( isset($_POST['api-users-refresh'] ) && 'true' === $_POST['api-users-refresh'] ) {
 			$users = new Data\ListUsersData();
 			$users->updateUsers();
-			
 			echo '<h2>' . esc_html__( 'Users Updated', 'list-users' ) . '</h2>';
 		}
 	}

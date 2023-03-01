@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Users front end display.
  */
@@ -9,8 +8,6 @@ declare(strict_types=1);
 namespace ListUsers;
 
 use ListUsers\Info;
-use PHP_CodeSniffer\Reports\Info as ReportsInfo;
-use WP;
 
 class ListUsers
 {

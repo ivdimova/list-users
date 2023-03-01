@@ -2,6 +2,7 @@ const table = document.getElementById( 'user-details' );
 const button = document.getElementById('users-udpate');
 const title = document.getElementById('users-title');
 const attributes = window.listUsers;
+const editor = document.querySelector('.wp-block-post-content');
 
 function update_table(table) {
 	actionUrl = table.getAttribute('action');
@@ -50,6 +51,7 @@ function update_table(table) {
 				newTableBody.append(newRow);
 			  });	
 			  tableBody.replaceWith( newTableBody );
-		});
+		}
+	);
 }
 update_table(table);
